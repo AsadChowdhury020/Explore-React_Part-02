@@ -1,27 +1,70 @@
+import { Suspense } from 'react';
 import './App.css'
 import BatsMan from './BatsMan';
 import Counter from './Counter';
+import Users from './Users';
+import Friends from './Friends';
+import Posts from './Posts';
+import Comments from './Comments';
+
+const fetchUsers = fetch("https://jsonplaceholder.typicode.com/users")
+  .then(response => response.json())
+
+const fetchFriends = async () => {
+  const response = await fetch("https://jsonplaceholder.typicode.com/users")
+  return response.json()
+}
+
+const fetchPosts = fetch('https://jsonplaceholder.typicode.com/posts')
+  .then(response => response.json())
+
+const fetchComments = async () =>{
+  const responseComments = await fetch('https://jsonplaceholder.typicode.com/comments')
+  return responseComments.json() ;
+}
 
 function App() {
 
-  function handleClick(){
-    alert('I am clicked') ;
-  }
+  // const friendPromise = fetchFriends() ;
+  // const postsPromise = fetchPostsAsync() ;
+  const commentsPromise = fetchComments() ;
 
-  const handleClick3 = () =>{
-    alert('Click 3')
-  }
 
-  const handleAddFive = (number) => {
-    const newNumber = number + 5 ;
-    alert('New number is '+ newNumber) ;
-  }
+  // function handleClick(){
+  //   alert('I am clicked') ;
+  // }
+
+  // const handleClick3 = () =>{
+  //   alert('Click 3')
+  // }
+
+  // const handleAddFive = (number) => {
+  //   const newNumber = number + 5 ;
+  //   alert('New number is '+ newNumber) ;
+  // }
 
   return (
     <>
         <h3>Vite + React</h3>
 
-        <BatsMan></BatsMan>
+        <Suspense fallback = {<h3>Comments are loading......</h3>} >
+          <Comments commentsPromise = {commentsPromise} ></Comments>
+        </Suspense>
+
+        {/* <Suspense fallback= {<h3>Loading posts......</h3>} >
+          <Posts fetchPosts = {fetchPosts} ></Posts>
+        </Suspense> */}
+
+        {/* <Suspense fallback = {<h3>Loading number of friends...</h3>} >
+          <Friends friendPromise = {friendPromise} ></Friends>
+        </Suspense>
+    
+       <Suspense fallback = {<p>Loading......</p>} >
+        <Users fetchUsers={fetchUsers} ></Users>
+       </Suspense> */}
+
+
+        {/* <BatsMan></BatsMan> */}
 
         {/* <Counter></Counter>
 

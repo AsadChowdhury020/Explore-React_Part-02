@@ -40,3 +40,17 @@
 .read-the-docs {
   color: #888;
 }
+.card{
+  border: 2px solid red;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.post_card{
+  border : 2px solid blue ;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 20px;
+  width: 3/4;
+}
